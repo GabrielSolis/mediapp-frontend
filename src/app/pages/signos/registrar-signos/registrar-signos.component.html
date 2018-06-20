@@ -1,0 +1,69 @@
+<div class="example-container">
+  <mat-toolbar>Registro de signos vitales
+  </mat-toolbar>
+
+    
+ 
+  <form class="example-container" [formGroup]="form" (ngSubmit)="registrarEditar()" #loginForm="ngForm">
+       <div>
+        <mat-form-field class="example-full-width" *ngIf="!edicion">
+
+          <input type="text" placeholder="Apellidos de paciente" aria-label="Number" 
+           matInput  [formControl]="apellidoPacienteControl" [matAutocomplete]="auto"
+           [disabled]="edicion">
+
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+
+            <mat-option *ngFor="let paciente of filteredOptions | async" [value]="paciente" [disabled]="edicion">
+              {{ paciente.nombres}} {{paciente.apellidos}} 
+            </mat-option>
+
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="agregarPaciente()" type="button">
+          <mat-icon>create</mat-icon>
+          <span>Nuevo paciente</span>
+        </button>
+       </div>
+        
+
+        <mat-form-field class="example-full-width" *ngIf="edicion">
+            <input type="text" matInput placeholder="Paciente" required formControlName="paciente">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker"  [max]="maxFecha" placeholder="Fecha de toma de signos"  formControlName="fechaSignos">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> 
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+
+      <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+      </div>
+    
+      <mat-form-field class="example-full-width">
+        <input type="number" matInput placeholder="Temperatura" required formControlName="temperatura" maxlength="2">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <input matInput type="number" placeholder="Pulso" required formControlName="pulso"  maxlength="2">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ritmo Respiratorio" required formControlName="ritmo" type="number" maxlength="2">
+      </mat-form-field>
+  
+    
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+      </button>
+      <button mat-raised-button color="accent" routerLink='/signos' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+      </button>
+    </form>
+</div>

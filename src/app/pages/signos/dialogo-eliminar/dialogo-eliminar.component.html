@@ -1,0 +1,11 @@
+<div>
+  <h1 mat-dialog-title>Eliminar Signos vitales</h1>
+  <div mat-dialog-content>
+    <h3>Fecha: <span>{{fecha}}</span></h3>
+    <span>¿Desea eliminar los signos vitales del paciente: {{signos.nombres}} {{signos.apellidos}} ?</span>
+  </div>
+  <div mat-dialog-actions>
+    <button (click)="eliminar()">Aceptar </button>
+    <button (click)="cancelar()">Cancelar </button>
+  </div>
+</div>
